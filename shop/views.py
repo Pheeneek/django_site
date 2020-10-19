@@ -40,3 +40,9 @@ class IndexView(View):
 
     def get(self, request):
         return render(request, 'shop/index.html')
+
+
+class ShopView(View):
+
+    def get(self, request):
+        return render(request, 'shop/shop.html')
