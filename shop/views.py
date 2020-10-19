@@ -36,8 +36,7 @@ class CartView(View):
         return HttpResponse(cart)
 
 
+class IndexView(View):
 
-
-
-
-
+    def get(self, request):
+        return render(request, 'shop/index.html')
