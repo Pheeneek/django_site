@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.views import View
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, redirect, reverse
+from django.core.paginator import Paginator, EmptyPage
 
 from .models import Product, Cart
 from .conf_info import info
@@ -45,9 +46,7 @@ class IndexView(View):
 
 class ShopView(View):
 
-    def get(self, request, page=None):
-        if page is None:
-            return redirect(reverse('shop', kwargs={'page': 1}))
+    def get(self, request, page=1):
         products_list = [
             {
                 'name': 'Bell Pepper',
@@ -116,4 +115,16 @@ class ShopView(View):
                 'price': '$120.00'
             }
         ]
-        return render(request, 'shop/shop.html', {'product_list': products_list})
+        prod_on_page = 3
+        paginator = Paginator(products_list, prod_on_page)
+
+        try:
+            products_list = paginator.page(page)
+            products_list.tuple_pages = tuple(paginator.page_range)
+        except EmptyPage:
+            redirect(reverse('shop'))
+
+        context = {'product_list': products_list}
+        context.update(info)
+
+        return render(request, 'shop/shop.html', context)
