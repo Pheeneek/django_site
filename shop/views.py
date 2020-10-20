@@ -1,9 +1,10 @@
 from django.shortcuts import render
 from django.views import View
 from django.http import HttpResponse
-from django.shortcuts import get_object_or_404
+from django.shortcuts import get_object_or_404, redirect, reverse
 
 from .models import Product, Cart
+from .conf_info import info
 
 # Create your views here.
 
@@ -39,12 +40,14 @@ class CartView(View):
 class IndexView(View):
 
     def get(self, request):
-        return render(request, 'shop/index.html')
+        return render(request, 'shop/index.html', info)
 
 
 class ShopView(View):
 
-    def get(self, request):
+    def get(self, request, page=None):
+        if page is None:
+            return redirect(reverse('shop', kwargs={'page': 1}))
         products_list = [
             {
                 'name': 'Bell Pepper',
