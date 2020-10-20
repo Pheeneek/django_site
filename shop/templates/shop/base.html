@@ -4,7 +4,9 @@
 
 <html lang="en">
   <head>
-    <title>Vegefoods - Free Bootstrap 4 Template by Colorlib</title>
+      {% block title %}
+        <title> Vegefoods - Free Bootstrap 4 Template by Colorlib </title>
+      {% endblock %}
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
@@ -85,6 +87,7 @@
     <!-- END nav -->
 
         {% block content %}
+
         {% endblock %}
 
         <section class="ftco-section ftco-no-pt ftco-no-pb py-5 bg-light">
