@@ -70,13 +70,20 @@
           <div class="col text-center">
             <div class="block-27">
               <ul>
-                <li><a href="#">&lt;</a></li>
-                <li class="active"><span>1</span></li>
-                <li><a href="#">2</a></li>
-                <li><a href="#">3</a></li>
-                <li><a href="#">4</a></li>
-                <li><a href="#">5</a></li>
-                <li><a href="#">&gt;</a></li>
+				  {% if product_list.has_previous %}
+                	<li><a href="{% url 'shop' %}{{product_list.next_page_previous}}">&lt;</a></li>
+				  {% endif %}
+
+				  {% for page in product_list.tuple_pages %}
+				  	{% if forloop.counter == product_list.number %}
+						<li class="active"><span>{{product_list.number}}</span></li>
+				  	{% else %}
+						<li><a href="{% url 'shop' %}{{forloop.counter}}">{{forloop.counter}}</a></li>
+					{% endif %}
+				  {% endfor %}
+				  {% if product_list.has_next %}
+                	<li><a href="{% url 'shop' %}{{product_list.next_page_number}}">&gt;</a></li>
+				  {% endif %}
               </ul>
             </div>
           </div>
