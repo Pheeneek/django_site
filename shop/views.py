@@ -6,6 +6,7 @@ from django.core.paginator import Paginator, EmptyPage
 
 from .models import Product, Cart
 from .conf_info import info
+from .settings.base import INFO
 
 # Create your views here.
 
@@ -41,12 +42,27 @@ class CartView(View):
 class IndexView(View):
 
     def get(self, request):
-        return render(request, 'shop/index.html', info)
+        context = INFO  # dict
+        return render(request, 'shop/index.html', context)
 
 
 class ShopView(View):
 
     def get(self, request, page=1):
+        d = {
+            'page_obj': [
+                {
+                    'image': ...,
+                    'name': ...,
+                    'discount': ...,
+                    'price_dc': ...,
+                    'price_sale': ...,
+                }
+            ]
+        }
+
+
+
         products_list = [
             {
                 'name': 'Bell Pepper',
@@ -128,3 +144,7 @@ class ShopView(View):
         context.update(info)
 
         return render(request, 'shop/shop.html', context)
+
+
+
+

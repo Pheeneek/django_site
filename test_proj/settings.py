@@ -111,6 +111,7 @@ LANGUAGE_CODE = 'ru'
 LANGUAGES = (
     ('ru', 'Russian'),
     ('en', 'English'),
+    ('de', 'Germany'),
 )
 
 LOCATE_PATHS = (
