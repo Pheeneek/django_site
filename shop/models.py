@@ -14,7 +14,7 @@ class User(models.Model):
     first_name = models.CharField(max_length=50)
     last_name = models.CharField(max_length=50)
 
-    phone_number = models.CharField(max_length=12, null=True, blank=True)
+    phone_number = models.CharField(max_length=12, null=True, blank=True, verbose_name='phone')
     sex = models.CharField(max_length=1, choices=SEX, null=True, blank=True)
 
     city = models.CharField(max_length=20, editable=False)

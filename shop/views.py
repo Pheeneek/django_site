@@ -8,6 +8,8 @@ from .models import Product, Cart
 from .conf_info import info
 from .settings.base import INFO
 
+
+
 # Create your views here.
 
 
@@ -43,6 +45,9 @@ class IndexView(View):
 
     def get(self, request):
         context = INFO  # dict
+
+        context += {'page_obj': Product.objects.all()}
+
         return render(request, 'shop/index.html', context)
 
 
