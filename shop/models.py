@@ -42,6 +42,7 @@ class Product(models.Model):
 class Cart(models.Model):
     user = models.ForeignKey('User', on_delete=models.CASCADE)
     product = models.ForeignKey('Product', on_delete=models.PROTECT)
+    count = models.IntegerField()
 
     create_at = models.DateTimeField(auto_now_add=True)
 
@@ -50,3 +51,10 @@ class Cart(models.Model):
 
     class Meta:
         unique_together = (('user', 'product'), )
+
+
+class Coupone(models.Model):
+    name = models.CharField(max_length=10, unique=True)
+    value = models.IntegerField()
+    min_coast = models.IntegerField()
+
