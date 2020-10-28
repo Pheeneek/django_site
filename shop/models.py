@@ -1,4 +1,6 @@
 from django.db import models
+from django.core.validators import ValidationError
+
 
 # Create your models here.
 
@@ -57,4 +59,12 @@ class Coupone(models.Model):
     name = models.CharField(max_length=10, unique=True)
     value = models.IntegerField()
     min_coast = models.IntegerField()
+    start_at = models.DateField()
+    finish_at = models.DateField()
 
+    def clean(self):
+        self.check_date()
+
+    def check_date(self):
+        if self.start_at > self.finish_at:
+            raise ValidationError({'finish_at': ["Start date must be less finish date"]})

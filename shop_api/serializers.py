@@ -26,6 +26,14 @@ class CouponeSerializer(serializers.ModelSerializer):
         model = Coupone
         fields = '__all__'
 
+    def validate(self, attrs):
+        self.check_date(attrs)
+
+    @staticmethod
+    def check_date(attrs):
+        if attrs['start_at'] > attrs['finish_at']:
+            raise serializers.ValidationError({'finish_at': ["Start date must be less finish date"]})
+
 
 class CartSerializer(serializers.ModelSerializer):
     class Meta:
@@ -36,6 +44,8 @@ class CartSerializer(serializers.ModelSerializer):
             'product',
             'count'
         )
+
+
 
 
 

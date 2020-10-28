@@ -41,16 +41,16 @@ class ProductViewSet(ReadOnlyModelViewSet):
         return Response(serializer.data)
 
 
-class CouponeViewSet(GenericViewSet):
+class CouponeViewSet(ModelViewSet):
 
     queryset = Coupone.objects.all()
     serializer_class = CouponeSerializer
 
-    def retrieve(self, request, pk=None):
-        obj = get_object_or_404(self.get_queryset(), pk=pk)
-        serializer = self.get_serializer(obj)
-
-        return Response(serializer.data)
+    # def retrieve(self, request, pk=None):
+    #     obj = get_object_or_404(self.get_queryset(), pk=pk)
+    #     serializer = self.get_serializer(obj)
+    #
+    #     return Response(serializer.data)
 
 
 class CartViewSet(ListModelMixin,
