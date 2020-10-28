@@ -7,7 +7,7 @@ from rest_framework import status
 from .models import User, Product, Coupon, Cart
 from rest_framework import mixins
 from .serializer import UserSerializer, ProductSerializer, CouponSerializer, CartSerializer
-
+from shop_1.views import ShopView
 # Create your views here.
 
 
